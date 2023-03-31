@@ -1,0 +1,52 @@
+
+.button {
+    margin: 4px;
+    padding: 4px;
+    border-radius: 3px;
+    transition: all ease .3s;
+}
+
+.button:hover {
+    background-color: black;
+    color: white;
+}
+
+.alert {
+    color: white;
+    background-color: red;
+}
+
+.success {
+    color: white;
+    background-color: green;
+}
+
+
+.formButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 200px;
+    margin: 10px auto;
+    background-color: #166dfc;
+    -webkit-font-smoothing: antialiased;
+    border: 1px solid #6d6d6d;
+    border-radius: 2px;
+    color: #FFFFFF;
+    cursor: pointer;
+    padding: 9px 16px;
+    text-align: center;
+    -webkit-transition: .2s ease;
+    -moz-transition: .2s ease;
+    transition: .2s ease;
+    align-self: center;
+}
+
+.formButton:active {
+    border-color: #2a2a2a;
+}
+
+.formButton:hover {
+    background-color: #039;
+    color: #FFFFFF;
+}

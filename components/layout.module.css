@@ -1,0 +1,29 @@
+.container {
+    max-width: 36rem;
+    padding: 0 1rem;
+    margin: 3rem auto 6rem;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.backToHome {
+    margin: 3rem 0 0;
+}
+
+.todoListTitle {
+    font-size: 3.5rem;
+
+}
+
+.decLine {
+    height: 2px;
+    background-color: #f3750e;
+    animation: line-forward;
+    animation-duration: 3s;
+    transition-timing-function: ease-in-out;
+    margin: 0 0 10px 0;
+}
