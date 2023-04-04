@@ -3,26 +3,27 @@ import {Todo} from '@/types/Todo';
 import {CustomButton} from "@/components/Button/CustomButton";
 import {Form} from 'react-bootstrap';
 import styles from '@/styles/utils.module.css' ;
+import {createTodo} from "@/lib/mutations";
+import {getTodos} from "@/lib/queries";
 
 interface TodoFormProps {
     addTodo: (todo: Todo) => void;
+    handleCreateTodos: () => void;
 }
 
-const TodoForm: React.FC<TodoFormProps> = ({addTodo}) => {
+const TodoForm: React.FC<TodoFormProps> = ({addTodo, handleCreateTodos}) => {
     const [title, setTitle] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         setLoading(true)
         e.preventDefault()
-        await addTodo({
-            id: Date.now(),
-            title,
-            completed: false,
-        });
+        await createTodo(title);
         setTitle("");
+        await handleCreateTodos();
         setLoading(false);
     };
+
 
     return (
         <form className={styles.addTodoForm}>
