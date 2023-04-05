@@ -4,6 +4,7 @@ import TodoForm from '../components/TodoForm'
 import {Todo} from '../types/Todo';
 import styles from '../components/layout.module.css';
 import {getTodos} from "@/lib/queries";
+import {deleteTodo} from "@/lib/mutations";
 
 export const TodoApp: React.FC = ({todos, setTodos}) => {
     const [newTodos, setNewTodo] = useState<Todo[]>(todos)
@@ -16,15 +17,19 @@ export const TodoApp: React.FC = ({todos, setTodos}) => {
         await setNewTodo(fetchedTodos.props.todos)
     }
 
+    const handleDeleteTodo = async (id: string) => {
+        await deleteTodo(id);
+        await handleCreateTodo();
+    }
+
     return (
         <>
             <div>
                 <div>
                     <h1 className={styles.todoListTitle}>Todo App</h1>
-                    <div className={styles.decLine}></div>
                 </div>
                 <TodoForm addTodo={addTodo} handleCreateTodos={handleCreateTodo}></TodoForm>
-                <TodoList todos={newTodos} setTodos={setNewTodo}/>
+                <TodoList todos={newTodos} setTodos={setNewTodo} handleDeleteTodo={handleDeleteTodo}/>
             </div>
         </>
 

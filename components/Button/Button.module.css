@@ -22,6 +22,7 @@
 }
 
 
+
 .formButton {
     display: flex;
     justify-content: center;
@@ -49,4 +50,36 @@
 .formButton:hover {
     background-color: #039;
     color: #FFFFFF;
+}
+
+.deleteButton {
+    background-color: red;
+    cursor: pointer;
+    color: white;
+    outline: none;
+}
+
+.deleteButton::before,
+.deleteButton::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2px;
+    height: 14px;
+    background-color: currentColor;
+}
+
+.deleteButton::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.deleteButton::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+
+ .deleteButton:hover {
+    border: 1px solid #FFFFFF !important;
+    color: #000000 !important;
 }

@@ -1,4 +1,4 @@
-import {collection, addDoc} from "firebase/firestore";
+import {collection, addDoc, deleteDoc, doc} from "firebase/firestore";
 import {db} from '@/lib/firebase'
 
 export const createTodo = async (title: string) => {
@@ -12,3 +12,14 @@ export const createTodo = async (title: string) => {
         console.error('Error creating todo:', error);
     }
 };
+
+
+export const deleteTodo = async (id: string) => {
+    try {
+        const todoDocRef = doc(db, 'todos', id);
+        await deleteDoc(todoDocRef);
+
+    } catch(error){
+        console.error(`Couldn't delete Todo with ID ${id}`);
+    }
+}

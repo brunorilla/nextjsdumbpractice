@@ -27,3 +27,8 @@
     transition-timing-function: ease-in-out;
     margin: 0 0 10px 0;
 }
+
+
+.completed {
+    line-through: text-gray-400;
+}

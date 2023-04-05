@@ -5,13 +5,14 @@ import styles from '@/styles/utils.module.css';
 
 interface TodoListProps {
     todos: Todo[];
-    setTodos:  (value: (((prevState: Todo[]) => Todo[]) | Todo[])) => void;
+    setTodos: (value: (((prevState: Todo[]) => Todo[]) | Todo[])) => void;
+    handleDeleteTodo: (id: string) => void;
 }
 
 
-const TodoList: React.FC<TodoListProps> = ({todos, setTodos}) => {
+const TodoList: React.FC<TodoListProps> = ({todos, setTodos, handleDeleteTodo}) => {
 
-    const handleToggle = (id: number) => {
+    const handleToggle = (id: string) => {
         const updatedTodos = todos.map(todo => {
             if (todo.id === id) {
                 return {...todo, completed: !todo.completed};
@@ -25,9 +26,10 @@ const TodoList: React.FC<TodoListProps> = ({todos, setTodos}) => {
     return (
         <div>
             <ul className={styles.unordered}>
-            {todos.map((todo) => (
-                <TodoItem className={styles.listItem} key={todo.id} todo={todo} onToggle={handleToggle}/>
-            ))}
+                {todos.map((todo) => (
+                    <TodoItem className={styles.listItem} key={todo.id} todo={todo} onToggle={handleToggle}
+                              handleDeleteTodo={handleDeleteTodo}/>
+                ))}
             </ul>
         </div>
     )
