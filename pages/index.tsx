@@ -5,6 +5,7 @@ import styles from '../styles/Home.module.css'
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import {getTodos} from '@/lib/queries';
+import DefaultCalendar from "@/components/calendar/Calendar";
 
 
 interface Props {
@@ -14,6 +15,7 @@ interface Props {
 const Home: React.FC<Props> = ({todos}) => {
     return (
         <div className={styles.main}>
+            <DefaultCalendar></DefaultCalendar>
             <TodoApp todos={todos}/>
         </div>
     );
