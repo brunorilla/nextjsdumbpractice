@@ -26,7 +26,7 @@ export const TodoApp: React.FC = ({todos, setTodos}) => {
         <>
             <div>
                 <div>
-                    <h1 className={styles.todoListTitle}>Todo App</h1>
+                    <h1 className={styles.todoListTitle}>Tus reservas</h1>
                 </div>
                 <TodoForm addTodo={addTodo} handleCreateTodos={handleCreateTodo}></TodoForm>
                 <TodoList todos={newTodos} setTodos={setNewTodo} handleDeleteTodo={handleDeleteTodo}/>

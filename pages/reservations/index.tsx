@@ -11,7 +11,7 @@ interface PostProps {
 const Posts: React.FC<PostProps> = ({children}) => {
     return (<>
         <div className={styles.main}>
-            <h1>Posts</h1>
+            <h1>Reservar</h1>
             {children}
         </div>
     </>);
