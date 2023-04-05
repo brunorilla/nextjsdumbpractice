@@ -1,7 +1,9 @@
 export type User = {
-    id: string;
+    id: number;
     name: string;
     password: string;
     unit: string;
     isDue: boolean;
 }
+
+

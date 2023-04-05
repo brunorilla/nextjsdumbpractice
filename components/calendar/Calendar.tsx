@@ -3,9 +3,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 
 
 
-
 const DefaultCalendar = ()=> {
-    return <FullCalendar plugins={[dayGridPlugin]} initialView={"dayGridMonth"}/>
+    return <FullCalendar aspectRatio={2} plugins={[dayGridPlugin]} initialView={"dayGridMonth"}/>
 }
 
 export default DefaultCalendar;

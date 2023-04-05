@@ -15,20 +15,21 @@ interface TodoProps {
 const TodoItem: React.FC<TodoProps> = ({todo, onToggle, className, handleDeleteTodo}) => {
     const [loading, setLoading] = useState<boolean>(false);
 
-    const handleToggle = ()=> {
+    const handleToggle = () => {
         onToggle(todo.id)
     }
 
-    const handleDeletion = async (todoId: string)=> {
+    const handleDeletion = async (todoId: string) => {
         setLoading(true);
         await handleDeleteTodo(todoId);
         setLoading(false);
     }
 
     return (
-        <li className={`${className} + " list-group-item`}>
+        <li className={`${className} + "list-group-item m`}>
             <input className="form-check-input" type="checkbox" checked={todo.completed} onChange={handleToggle}/>
-            <span className={todo.completed ? layoutStyles.completed : ''}>{todo.title}</span> <CustomButton onClick={()=> handleDeletion(todo.id)} styling={styles.deleteButton} loading={loading}></CustomButton>
+            <span className={todo.completed ? layoutStyles.completed : ''}>{todo.title}</span> <CustomButton
+            onClick={() => handleDeletion(todo.id)} styling={styles.deleteButton} loading={loading}></CustomButton>
         </li>
     )
 }

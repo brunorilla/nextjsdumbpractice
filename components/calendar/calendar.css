@@ -1,0 +1,14 @@
+
+.calendar {
+    width: 50%;
+}
+
+/* Set the width of the calendar element to 100% of its container */
+.fc {
+    width: auto;
+}
+
+/* Set the height of the calendar element to 75% of its container */
+.fc-view {
+    height: 100%;
+}
