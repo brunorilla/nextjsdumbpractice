@@ -26,7 +26,7 @@ const TodoList: React.FC<TodoListProps> = ({todos, setTodos, handleDeleteTodo}) 
     return (
         <div>
             <ul className={styles.unordered}>
-                {todos.map((todo) => (
+                {todos?.map((todo) => (
                     <TodoItem className={styles.listItem} key={todo.id} todo={todo} onToggle={handleToggle}
                               handleDeleteTodo={handleDeleteTodo}/>
                 ))}

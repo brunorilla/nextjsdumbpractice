@@ -13,6 +13,7 @@ interface TodoFormProps {
 
 const TodoForm: React.FC<TodoFormProps> = ({addTodo, handleCreateTodos}) => {
     const [title, setTitle] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(false);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -30,9 +31,18 @@ const TodoForm: React.FC<TodoFormProps> = ({addTodo, handleCreateTodos}) => {
             <div className={styles.relative}>
                 <input id="addtodo" className={styles.inputStyle} required value={title} type={"text"}
                        onChange={(e) => setTitle(e.target.value)}/>
-                <label className={styles.labelStyle} htmlFor={"addtodo"}>New Todo</label>
+                <label className={styles.labelStyle} htmlFor={"addtodo"}>Email</label>
             </div>
-            <CustomButton text={"Add"} type={"submit"} onClick={handleSubmit} loading={loading}></CustomButton>
+            <div className={styles.relative}>
+
+            <input id="password"
+                       className={styles.inputStyle}
+                       required
+                       type={"password"}
+                       onChange={(e) => setPassword(e.target.value)}/>
+                <label className={styles.labelStyle} htmlFor={"addtodo"}>Password</label>
+            </div>
+            <CustomButton text={"Ingresar"} type={"submit"} onClick={handleSubmit} loading={loading}></CustomButton>
         </form>
 
     )

@@ -1,4 +1,4 @@
-import {TodoApp} from "./TodoApp"
+import {LogInWrapper} from "../components/LogInWrapper"
 import {GetServerSideProps} from "next";
 import {Todo} from "@/types/Todo";
 import styles from '../styles/Home.module.css'
@@ -18,7 +18,7 @@ const Home: React.FC<Props> = ({todos}) => {
             <div className="calendar">
                 <DefaultCalendar></DefaultCalendar>
             </div>
-            <TodoApp todos={todos}/>
+            <LogInWrapper todos={todos}/>
         </div>
     );
 };
