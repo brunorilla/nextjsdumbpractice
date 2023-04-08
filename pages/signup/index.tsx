@@ -4,6 +4,7 @@ import {Formik, Form, Field, ErrorMessage} from 'formik';
 import * as Yup from 'yup';
 import {UnitsEnum} from "@/types/UnitsEnum";
 import styles from '@/styles/Home.module.css';
+import formstyles from './signupstyles.module.css';
 
 const SignUpForm: React.FC = () => {
     const SignupSchema = Yup.object().shape({
@@ -11,6 +12,10 @@ const SignUpForm: React.FC = () => {
             .min(2, 'El nombre debe tener 5 caracteres como mínimo')
             .max(50, 'Utilice menos de 50 caracteres para el nombre')
             .required('El nombre es requerido'),
+        surname: Yup.string()
+            .min(2, 'El apellido debe tener 5 caracteres como mínimo')
+            .max(50, 'Utilice menos de 50 caracteres para el nombre')
+            .required('El apellido es requerido'),
         password: Yup.string()
             .min(8, 'Utilice 8 caracteres como mínimo')
             .required('La contraseña es requerida'),
@@ -37,40 +42,46 @@ const SignUpForm: React.FC = () => {
             }}
         >
             {({errors, touched}) => (
-                <Form>
-                    <div>
-                        <label htmlFor="name">Name</label>
-                        <Field name="name"/>
-                        <ErrorMessage name="name"/>
-                    </div>
-                    <div>
-                        <label htmlFor="password">Password</label>
-                        <Field name="password" type="password"/>
-                        <ErrorMessage name="password"/>
-                    </div>
-                    <div>
-                        <label htmlFor="email">Email</label>
-                        <Field name="email" type="email"/>
-                        <ErrorMessage name="email"/>
-                    </div>
-                    <div>
-                        <label htmlFor="unit">Unit</label>
-                        <Field placeholder={"4A"} name="unit" as="select">
-                            <option value="">Unidad a la que pertenece</option>
-                            {Object.values(UnitsEnum).map((unit) => {
-                                console.log(unit);
-                                return (
-                                    <option key={unit} value={unit}>
-                                        {unit}
-                                    </option>
-                                )
-                            })}
-                        </Field>
-                        <ErrorMessage name="unit"/>
-                    </div>
+                <div className={formstyles.formContainer}>
+                    <Form>
+                        <div className={formstyles.formGroup}>
+                            <label className={formstyles.formLabel} htmlFor="name">Nombre</label>
+                            <Field className={formstyles.formInput} name="name"/>
+                            <ErrorMessage className={formstyles.formError} name="name"/>
+                        </div>
+                        <div className={formstyles.formGroup}>
+                            <label className={formstyles.formLabel} htmlFor="surname">Apellido</label>
+                            <Field className={formstyles.formInput} name="surname"/>
+                            <ErrorMessage className={formstyles.formError} name="surname"/>
+                        </div>
+                        <div className={formstyles.formGroup}>
+                            <label className={formstyles.formLabel} htmlFor="password">Password</label>
+                            <Field className={formstyles.formInput} name="password" type="password"/>
+                            <ErrorMessage className={formstyles.formError} name="password"/>
+                        </div>
+                        <div className={formstyles.formGroup}>
+                            <label className={formstyles.formLabel} htmlFor="email">Email</label>
+                            <Field className={formstyles.formInput} name="email" type="email"/>
+                            <ErrorMessage className={formstyles.formError} name="email"/>
+                        </div>
+                        <div className={formstyles.formGroup}>
+                            <label className={formstyles.formLabel} htmlFor="unit">Unidad</label>
+                            <Field className={formstyles.formSelect} placeholder={"4A"} name="unit" as="select">
+                                <option value="">Unidad a la que pertenece</option>
+                                {Object.values(UnitsEnum).map((unit) => {
+                                    return (
+                                        <option key={unit} value={unit}>
+                                            {unit}
+                                        </option>
+                                    )
+                                })}
+                            </Field>
+                            <ErrorMessage className={formstyles.formError} name="unit"/>
+                        </div>
 
-                    <button type="submit">Registrarse</button>
-                </Form>
+                        <button className={formstyles.formButton} type="submit">Registrarse</button>
+                    </Form>
+                </div>
             )}
         </Formik>
     );

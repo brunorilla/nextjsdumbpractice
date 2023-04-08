@@ -2,37 +2,41 @@ import '../styles/globals.css';
 
 import type {AppProps} from 'next/app'
 import {Nav} from "@/components/Nav";
-import {useEffect, useState} from "react";
-import {checkAuthentication} from "@/lib/auth";
-import {LoginPage} from "@/components/login/LoginPage";
+import {AuthProvider, useAuth} from "@/lib/auth.tsx";
+import LoginPage from "@/pages/login";
 import SignUp from "@/pages/signup";
+import Link from "next/link";
+import React from "react";
 
 
 export default function App({Component, pageProps}: AppProps) {
-    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-    const [isRegistered, setIsRegistered] = useState<boolean>(false);
 
-    useEffect(() => {
-        const userIsLoggedIn = checkAuthentication();
-        setIsLoggedIn(userIsLoggedIn);
-    }, [])
+    return (
+        <AuthProvider>
+            <MainComponentWrapper Component={Component} pageProps={pageProps}></MainComponentWrapper>
+        </AuthProvider>
+    )
+}
 
-    if (!isLoggedIn) {
-        return (
-            <>
-                <LoginPage/>
-            </>
-        )
-    } else if (!isRegistered) {
-        return (
-            <SignUp/>
-        )
-    }
+
+function MainComponentWrapper({Component, pageProps}: AppProps) {
+    const {authState} = useAuth();
 
     return (
         <>
-            <Nav></Nav>
-            <Component  {...pageProps} />
+            {authState.isAuthenticated ? (
+                <>
+                    <Nav></Nav>
+                    <Component {...pageProps}/>
+                </>
+            ) : (!authState.isAuthenticated && authState.isRegistered ? (
+                    <>
+                        <LoginPage/>
+                    </>
+                ) : <SignUp/>
+            )
+            }
         </>
     )
+
 }

@@ -1,7 +1,4 @@
 import styles from '../../styles/Home.module.css';
-import variables from '../../styles/variables.module.scss'
-import {Nav} from "@/components/Nav";
-
 
 interface PostProps {
     children: React.ReactNode

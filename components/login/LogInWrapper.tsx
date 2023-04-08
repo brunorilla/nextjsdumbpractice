@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import TodoList from './TodoList'
-import TodoForm from './TodoForm'
-import {Todo} from '../types/Todo';
-import styles from './layout.module.css';
+import TodoList from '../TodoList'
+import TodoForm from '../TodoForm'
+import {Todo} from '@/types/Todo';
+import styles from '../layout.module.css';
 import {getTodos} from "@/lib/queries";
 import {deleteTodo} from "@/lib/mutations";
 import Link from "next/link";
