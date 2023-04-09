@@ -1,36 +1,54 @@
 import React, {useState} from "react";
-import TodoList from '../TodoList'
-import TodoForm from '../TodoForm'
-import {Todo} from '@/types/Todo';
 import styles from '../layout.module.css';
-import {getTodos} from "@/lib/queries";
-import {deleteTodo} from "@/lib/mutations";
-import Link from "next/link";
+import * as Yup from 'yup';
+import {ErrorMessage, Field, Form, Formik} from "formik";
+import formStyles from '@/pages/signup/signupstyles.module.css';
+import globalStyles from "@/styles/utils.module.css";
 
 export const LogInWrapper: React.FC = ({todos, setTodos}) => {
-    const [newTodos, setNewTodo] = useState<Todo[]>(todos)
-    const addTodo = async (todo: Todo) => {
-        await setNewTodo([...newTodos, todo]);
-    }
-
-    const handleCreateTodo = async () => {
-        const fetchedTodos = await getTodos();
-        await setNewTodo(fetchedTodos.props.todos)
-    }
-
-    const handleDeleteTodo = async (id: string) => {
-        await deleteTodo(id);
-        await handleCreateTodo();
-    }
+    const LogInSchema = Yup.object().shape({
+        email: Yup.string()
+            .email('Formato de email inválido')
+            .required('Utilice su email para iniciar sesión'),
+        password: Yup.string()
+            .min(8, 'Su contraseña no puede ser menor a 8 caracteres')
+            .required('Olvido ingresar su contraseña')
+    })
 
     return (
         <>
-            <div>
-                <div>
-                    <h1 className={styles.todoListTitle}>Bienvenido</h1>
+            <div className={globalStyles.wrapper}>
+                <div className={globalStyles.displayFlex}>
+                    <h1 className={globalStyles.formTitles}>Bienvenido</h1>
                 </div>
-                <TodoForm addTodo={addTodo} handleCreateTodos={handleCreateTodo}></TodoForm>
-                <TodoList todos={newTodos} setTodos={setNewTodo} handleDeleteTodo={handleDeleteTodo}/>
+                <Formik
+                    initialValues={{
+                        email: '',
+                        password: '',
+                    }}
+                    validationSchema={LogInSchema}
+                    onSubmit={(values) => console.log(values)}
+                >
+                    {
+                        ({errors, touched}) => (
+                            <div className={formStyles.formContainer}>
+                                <Form>
+                                    <div className={formStyles.formGroup}>
+                                        <label className={formStyles.formLabel} htmlFor="email">Email</label>
+                                        <Field className={formStyles.formInput} name={"email"}></Field>
+                                        <ErrorMessage className={formStyles.formError} name={"email"}></ErrorMessage>
+                                    </div>
+                                 <div className={formStyles.formGroup}>
+                                        <label className={formStyles.formLabel} htmlFor="password">Constraseña</label>
+                                        <Field className={formStyles.formInput} name={"password"} type={"password"}></Field>
+                                        <ErrorMessage className={formStyles.formError} name={"password"}></ErrorMessage>
+                                    </div>
+                                    <button className={formStyles.formButton} type="submit">Ingresar</button>
+                                </Form>
+                            </div>
+                        )
+                    }
+                </Formik>
             </div>
         </>
 

@@ -1,4 +1,5 @@
 export enum ServiceEnum {
     LAUNDRY,
-    SUM
+    SUM,
+    DRYER
 }

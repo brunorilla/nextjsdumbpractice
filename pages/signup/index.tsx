@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import {UnitsEnum} from "@/types/UnitsEnum";
 import styles from '@/styles/Home.module.css';
 import formstyles from './signupstyles.module.css';
+import globalStyles from '@/styles/utils.module.css';
 
 const SignUpForm: React.FC = () => {
     const SignupSchema = Yup.object().shape({
@@ -28,68 +29,69 @@ const SignUpForm: React.FC = () => {
     });
 
     return (
-        <Formik
-            initialValues={{
-                name: '',
-                password: '',
-                email: '',
-                unit: '',
-                isDue: false,
-            }}
-            validationSchema={SignupSchema}
-            onSubmit={(values) => {
-                // handle form submission
-            }}
-        >
-            {({errors, touched}) => (
-                <div className={formstyles.formContainer}>
-                    <Form>
-                        <div className={formstyles.formGroup}>
-                            <label className={formstyles.formLabel} htmlFor="name">Nombre</label>
-                            <Field className={formstyles.formInput} name="name"/>
-                            <ErrorMessage className={formstyles.formError} name="name"/>
-                        </div>
-                        <div className={formstyles.formGroup}>
-                            <label className={formstyles.formLabel} htmlFor="surname">Apellido</label>
-                            <Field className={formstyles.formInput} name="surname"/>
-                            <ErrorMessage className={formstyles.formError} name="surname"/>
-                        </div>
-                        <div className={formstyles.formGroup}>
-                            <label className={formstyles.formLabel} htmlFor="password">Password</label>
-                            <Field className={formstyles.formInput} name="password" type="password"/>
-                            <ErrorMessage className={formstyles.formError} name="password"/>
-                        </div>
-                        <div className={formstyles.formGroup}>
-                            <label className={formstyles.formLabel} htmlFor="email">Email</label>
-                            <Field className={formstyles.formInput} name="email" type="email"/>
-                            <ErrorMessage className={formstyles.formError} name="email"/>
-                        </div>
-                        <div className={formstyles.formGroup}>
-                            <label className={formstyles.formLabel} htmlFor="unit">Unidad</label>
-                            <Field className={formstyles.formSelect} placeholder={"4A"} name="unit" as="select">
-                                <option value="">Unidad a la que pertenece</option>
-                                {Object.values(UnitsEnum).map((unit) => {
-                                    return (
-                                        <option key={unit} value={unit}>
-                                            {unit}
-                                        </option>
-                                    )
-                                })}
-                            </Field>
-                            <ErrorMessage className={formstyles.formError} name="unit"/>
-                        </div>
-
-                        <button className={formstyles.formButton} type="submit">Registrarse</button>
-                    </Form>
-                </div>
-            )}
-        </Formik>
+        <div className={globalStyles.wrapper}>
+            <Formik
+                initialValues={{
+                    name: '',
+                    password: '',
+                    email: '',
+                    unit: '',
+                    isDue: false,
+                }}
+                validationSchema={SignupSchema}
+                onSubmit={(values) => {
+                    // handle form submission
+                }}
+            >
+                {({errors, touched}) => (
+                    <div className={formstyles.formContainer}>
+                        <Form>
+                            <div className={formstyles.formGroup}>
+                                <label className={formstyles.formLabel} htmlFor="name">Nombre</label>
+                                <Field className={formstyles.formInput} name="name"/>
+                                <ErrorMessage className={formstyles.formError} name="name"/>
+                            </div>
+                            <div className={formstyles.formGroup}>
+                                <label className={formstyles.formLabel} htmlFor="surname">Apellido</label>
+                                <Field className={formstyles.formInput} name="surname"/>
+                                <ErrorMessage className={formstyles.formError} name="surname"/>
+                            </div>
+                            <div className={formstyles.formGroup}>
+                                <label className={formstyles.formLabel} htmlFor="password">Contraseña</label>
+                                <Field className={formstyles.formInput} name="password" type="password"/>
+                                <ErrorMessage className={formstyles.formError} name="password"/>
+                            </div>
+                            <div className={formstyles.formGroup}>
+                                <label className={formstyles.formLabel} htmlFor="email">Email</label>
+                                <Field className={formstyles.formInput} name="email" type="email"/>
+                                <ErrorMessage className={formstyles.formError} name="email"/>
+                            </div>
+                            <div className={formstyles.formGroup}>
+                                <label className={formstyles.formLabel} htmlFor="unit">Unidad</label>
+                                <Field className={formstyles.formSelect} placeholder={"4A"} name="unit" as="select">
+                                    <option value="">Unidad a la que pertenece</option>
+                                    {Object.values(UnitsEnum).map((unit) => {
+                                        return (
+                                            <option key={unit} value={unit}>
+                                                {unit}
+                                            </option>
+                                        )
+                                    })}
+                                </Field>
+                                <ErrorMessage className={formstyles.formError} name="unit"/>
+                            </div>
+                            <button className={formstyles.formButton} type="submit">Registrarse</button>
+                        </Form>
+                    </div>
+                )}
+            </Formik>
+        </div>
     );
 }
 
 const SignUpWrapper: React.FC = () => {
     return <div className={styles.main}>
-        <h1>Regístrese</h1>
+        <h1 className={globalStyles.formTitles}>Regístrese</h1>
         <SignUpForm/>
     </div>
 }
