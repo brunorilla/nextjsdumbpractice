@@ -41,3 +41,7 @@ next-env.d.ts
 /packages/frontend/.next/
 /packages/frontend/out/
 
+
+# ignore in packages/backend directory
+/packages/backend/node_modules/
+
