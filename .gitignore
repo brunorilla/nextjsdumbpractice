@@ -34,3 +34,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+# ignore in packages/frontend directory
+/packages/frontend/node_modules/
+/packages/frontend/.next/
+/packages/frontend/out/
+
