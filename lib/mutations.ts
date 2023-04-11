@@ -1,5 +1,10 @@
 import {collection, addDoc, deleteDoc, doc} from "firebase/firestore";
 import {db} from '@/lib/firebase'
+import {NewUser} from "@/types/User"
+import "firebase/firestore";
+import firebase from "firebase/compat";
+import Firestore = firebase.firestore.Firestore;
+
 
 export const createTodo = async (title: string) => {
     try {
@@ -21,5 +26,18 @@ export const deleteTodo = async (id: string) => {
 
     } catch(error){
         console.error(`Couldn't delete Todo with ID ${id}`);
+    }
+}
+
+
+export async function createNewUser(newUser: NewUser) {
+    try {
+        const { name, surname, password, email, unit, isDue } = newUser;
+        const response = await addDoc(collection(db, 'user'), { name, surname, password, email, unit, isDue});
+
+        console.log("New user created with ID: ", response.id);
+        return response;
+    } catch (error) {
+        console.error("Error creating user: ", error);
     }
 }

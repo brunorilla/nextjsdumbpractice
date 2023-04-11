@@ -3,6 +3,7 @@ import styles from "@/styles/Home.module.css";
 import {LogInWrapper} from "@/components/login/LogInWrapper";
 import {useAuth} from "@/lib/auth";
 import Link from "next/link";
+import globalStyles from '@/styles/utils.module.css';
 
 
 const LoginPage: React.FC = () => {
@@ -13,8 +14,11 @@ const LoginPage: React.FC = () => {
         <>
             <div className={styles.main}>
                 <LogInWrapper/>
-                <div><h4>¿No es usuario? </h4><Link href={"/signup"}
-                                                    onClick={() => setAuthState(prev => ({...prev, isRegistered: false}))}>Regístrese
+                <div className={globalStyles.wrapper + " " + globalStyles.displayFlex + " " + globalStyles.marginTop10}><h4>¿No es usuario? </h4><Link className={globalStyles.registerLink} href={"/signup"}
+                                                    onClick={() => setAuthState(prev => ({
+                                                        ...prev,
+                                                        isRegistered: false
+                                                    }))}>Regístrese
                 </Link>
                 </div>
 

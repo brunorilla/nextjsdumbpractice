@@ -1,11 +1,11 @@
 import '../styles/globals.css';
 
+
 import type {AppProps} from 'next/app'
 import {Nav} from "@/components/Nav";
 import {AuthProvider, useAuth} from "@/lib/auth.tsx";
 import LoginPage from "@/pages/login";
 import SignUp from "@/pages/signup";
-import Link from "next/link";
 import React from "react";
 
 
@@ -40,3 +40,5 @@ function MainComponentWrapper({Component, pageProps}: AppProps) {
     )
 
 }
+
+

@@ -1,9 +1,9 @@
 import React, {useState} from "react";
-import styles from '../layout.module.css';
 import * as Yup from 'yup';
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import formStyles from '@/pages/signup/signupstyles.module.css';
 import globalStyles from "@/styles/utils.module.css";
+import {Button} from "antd";
 
 export const LogInWrapper: React.FC = ({todos, setTodos}) => {
     const LogInSchema = Yup.object().shape({
@@ -43,7 +43,7 @@ export const LogInWrapper: React.FC = ({todos, setTodos}) => {
                                         <Field className={formStyles.formInput} name={"password"} type={"password"}></Field>
                                         <ErrorMessage className={formStyles.formError} name={"password"}></ErrorMessage>
                                     </div>
-                                    <button className={formStyles.formButton} type="submit">Ingresar</button>
+                                    <Button className={formStyles.formButton} type="submit">Ingresar</Button>
                                 </Form>
                             </div>
                         )

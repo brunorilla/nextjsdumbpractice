@@ -95,9 +95,27 @@
     margin-bottom: 1rem;
 }
 
+.registerLink {
+    display: inline-block;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s;
+    margin: 0 0 0 5px;
+}
+
+.registerLink:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
 .displayFlex {
     display:flex;
     justify-content: center;
+}
+
+.marginTop10 {
+    margin-top: 10px;
 }
 
 

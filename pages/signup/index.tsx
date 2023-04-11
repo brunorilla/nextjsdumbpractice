@@ -1,13 +1,19 @@
 import React from "react";
 
-import {Formik, Form, Field, ErrorMessage} from 'formik';
+import {Formik, Form, Field, ErrorMessage, FormikHelpers} from 'formik';
 import * as Yup from 'yup';
 import {UnitsEnum} from "@/types/UnitsEnum";
 import styles from '@/styles/Home.module.css';
 import formstyles from './signupstyles.module.css';
 import globalStyles from '@/styles/utils.module.css';
+import {Button} from "antd";
+import {NewUser} from "@/types/User";
+import {db} from '@/lib/firebase';
+import {createNewUser} from "@/lib/mutations";
 
 const SignUpForm: React.FC = () => {
+
+
     const SignupSchema = Yup.object().shape({
         name: Yup.string()
             .min(2, 'El nombre debe tener 5 caracteres como mínimo')
@@ -28,22 +34,26 @@ const SignUpForm: React.FC = () => {
             .required('La unidad es requerida'),
     });
 
+
+
     return (
         <div className={globalStyles.wrapper}>
             <Formik
                 initialValues={{
                     name: '',
+                    surname: '',
                     password: '',
                     email: '',
                     unit: '',
                     isDue: false,
                 }}
                 validationSchema={SignupSchema}
-                onSubmit={(values) => {
+                onSubmit={async(values) => {
+                    await createNewUser(values, db)
                     // handle form submission
                 }}
             >
-                {({errors, touched}) => (
+                {({errors, touched, handleSubmit, isSubmitting, }) => (
                     <div className={formstyles.formContainer}>
                         <Form>
                             <div className={formstyles.formGroup}>
@@ -80,7 +90,7 @@ const SignUpForm: React.FC = () => {
                                 </Field>
                                 <ErrorMessage className={formstyles.formError} name="unit"/>
                             </div>
-                            <button className={formstyles.formButton} type="submit">Registrarse</button>
+                            <Button loading={isSubmitting} onClick={()=>handleSubmit()} className={formstyles.formButton} type="submit">Registrarse</Button>
                         </Form>
                     </div>
                 )}

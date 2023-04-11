@@ -66,6 +66,7 @@
     cursor: pointer;
     max-width: 60%;
     margin: 0 auto;
+    min-height: 40px;
 }
 
 @media screen and (min-width: 480px){

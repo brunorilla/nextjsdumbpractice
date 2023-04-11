@@ -3,6 +3,7 @@ import {UnitsEnum} from "@/types/UnitsEnum";
 export type User = {
     id: string;
     name: string;
+    surname: string;
     password: string;
     email: string;
     unit: UnitsEnum;
@@ -12,6 +13,7 @@ export type User = {
 
 export type NewUser = {
     name: string;
+    surname: string;
     password: string;
     email: string;
     unit: UnitsEnum;
