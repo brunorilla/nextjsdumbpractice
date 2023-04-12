@@ -2,6 +2,7 @@ import express, {Request, Response} from 'express';
 import {firestore} from "./config/firebaseConfig";
 import {userRouter} from "./routes/users";
 import {USER_COLLECTION} from "./globals";
+import cors from 'cors';
 
 const app: express.Express = express();
 
@@ -9,6 +10,9 @@ app.listen(3001, () => {
     console.log("Server is running on http://localhost:3001");
 });
 
+app.use(cors({
+    origin: 'http://localhost:3000'
+}));
 app.use(express.json());
 app.use(userRouter);
 
@@ -27,8 +31,9 @@ app.get('/api/hello', (req: Request, res: Response) => {
             console.error('Error getting document:', error);
         });
 
-    res.json({ message: 'Hello World' });
+    res.json({message: 'Hello World'});
 });
+
 
 
 

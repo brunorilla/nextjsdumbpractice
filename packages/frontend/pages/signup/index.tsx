@@ -49,7 +49,7 @@ const SignUpForm: React.FC = () => {
                 }}
                 validationSchema={SignupSchema}
                 onSubmit={async(values) => {
-                    await createNewUser(values, db)
+                    await createNewUser(values as NewUser)
                     // handle form submission
                 }}
             >

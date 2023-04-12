@@ -19,3 +19,4 @@ export type NewUser = {
     unit: UnitsEnum;
     isDue: boolean;
 }
+
