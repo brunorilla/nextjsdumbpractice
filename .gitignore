@@ -45,4 +45,7 @@ next-env.d.ts
 
 # ignore in packages/backend directory
 /packages/backend/node_modules/
+/packages/backend/firebasecreds.json
 /packages/backend/.env
+/packages/backend/src/functions/node_modules
+/packages/backend/src/functions/node_modules/
