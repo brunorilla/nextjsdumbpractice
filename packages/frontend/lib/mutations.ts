@@ -39,5 +39,6 @@ export async function createNewUser(newUser: NewUser) {
        return response;
     } catch (error) {
         console.error("Error creating user: ", error);
+        return error;
     }
 }

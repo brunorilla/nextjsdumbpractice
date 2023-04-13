@@ -8,6 +8,7 @@ export type User = {
     email: string;
     unit: UnitsEnum;
     isDue: boolean;
+    firebaseUID: string;
 }
 
 

@@ -8,11 +8,11 @@ import formstyles from './signupstyles.module.css';
 import globalStyles from '@/styles/utils.module.css';
 import {Button} from "antd";
 import {NewUser} from "@/types/User";
-import {db} from '@/lib/firebase';
 import {createNewUser} from "@/lib/mutations";
+import {ToastContainer, toast} from "react-toastify";
+import {FormSubmissionError} from "@/lib/utils";
 
 const SignUpForm: React.FC = () => {
-
 
     const SignupSchema = Yup.object().shape({
         name: Yup.string()
@@ -34,6 +34,34 @@ const SignUpForm: React.FC = () => {
             .required('La unidad es requerida'),
     });
 
+    const handleSubmit = async (values: NewUser) => {
+        try {
+            const response = await createNewUser(values);
+            if (response.status === 201) {
+                return response.data;
+            } else {
+                throw new FormSubmissionError(response.response.data.error);
+            }
+        } catch (error) {
+            console.error(error);
+            throw new FormSubmissionError('Error al crear usuario.');
+        }
+    };
+
+    const onSubmit = async (values: NewUser) => {
+        try {
+            const data = await handleSubmit(values);
+            toast.success('Usuario creado');
+            console.log('Created user:', data);
+        } catch (error) {
+            if (error instanceof FormSubmissionError) {
+                toast.error(error.message);
+            } else {
+                console.error(error);
+                toast.error('An unexpected error occurred.');
+            }
+        }
+    };
 
 
     return (
@@ -48,12 +76,9 @@ const SignUpForm: React.FC = () => {
                     isDue: false,
                 }}
                 validationSchema={SignupSchema}
-                onSubmit={async(values) => {
-                    await createNewUser(values as NewUser)
-                    // handle form submission
-                }}
+                onSubmit={onSubmit}
             >
-                {({errors, touched, handleSubmit, isSubmitting, }) => (
+                {({errors, touched, handleSubmit, isSubmitting,}) => (
                     <div className={formstyles.formContainer}>
                         <Form>
                             <div className={formstyles.formGroup}>
@@ -90,11 +115,13 @@ const SignUpForm: React.FC = () => {
                                 </Field>
                                 <ErrorMessage className={formstyles.formError} name="unit"/>
                             </div>
-                            <Button loading={isSubmitting} onClick={()=>handleSubmit()} className={formstyles.formButton} type="submit">Registrarse</Button>
+                            <Button loading={isSubmitting} onClick={() => handleSubmit()}
+                                    className={formstyles.formButton} type="submit">Registrarse</Button>
                         </Form>
                     </div>
                 )}
             </Formik>
+            <ToastContainer/>
         </div>
     );
 }
