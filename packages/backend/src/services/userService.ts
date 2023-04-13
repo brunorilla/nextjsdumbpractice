@@ -15,7 +15,6 @@ async function createFirebaseUser(email: string, password: string) {
     }
 }
 
-export {createFirebaseUser}
 
 
 async function emailExists(email: string): Promise<boolean> {
@@ -24,4 +23,4 @@ async function emailExists(email: string): Promise<boolean> {
 }
 
 
-export {emailExists}
+export {createFirebaseUser, emailExists}
