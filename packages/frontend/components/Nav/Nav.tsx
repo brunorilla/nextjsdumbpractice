@@ -12,7 +12,7 @@ export const Nav: React.FC = () => {
                 <ul className={styles.ul}>
                     <li className={styles.li}>
                         <Link className={styles.link} href={"/"}>Home</Link>
-                        <Link className={styles.link} href="/reservations/">Reservar</Link>
+                        <Link className={styles.link} href="/reservations">Reservar</Link>
                     </li>
                 </ul>
             </nav>

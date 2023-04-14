@@ -1,5 +1,6 @@
 import {firestore} from "../config/firebaseConfig";
 import {auth} from '../config/firebaseConfig'
+import logger from "../config/logger";
 
 async function createFirebaseUser(email: string, password: string) {
     try {
@@ -7,14 +8,13 @@ async function createFirebaseUser(email: string, password: string) {
             email: email,
             password: password,
         });
-        console.log('Successfully created new user:', userRecord.uid);
+        logger.info(`Successfully created new user: ${userRecord.uid}`)
         return userRecord.uid;
     } catch (error) {
-        console.error('Error creating new user:', error);
+        logger.error(`Error creating new user: ${error}`);
         return '';
     }
 }
-
 
 
 async function emailExists(email: string): Promise<boolean> {

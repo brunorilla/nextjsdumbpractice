@@ -2,7 +2,7 @@ import '../styles/globals.css';
 
 
 import type {AppProps} from 'next/app'
-import {Nav} from "@/components/Nav";
+import {Nav} from "@/components/Nav/Nav";
 import {AuthProvider, useAuth} from "@/lib/auth.tsx";
 import LoginPage from "@/pages/login";
 import SignUp from "@/pages/signup";

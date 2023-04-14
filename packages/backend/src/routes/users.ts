@@ -31,9 +31,7 @@ router.post('/user/create', validateCreateUser, async (req: Request, res: Respon
         if (emailAlreadyExists) {
             return res.status(400).json({error: 'Email already in use'})
         }
-
         const firebaseUID = await createFirebaseUser(newUser.email, password)
-
         if (firebaseUID !== '') {
             const user: User = await createUser(firebaseUID, newUser as NewUser)
             res.status(201).json(user);
@@ -46,7 +44,5 @@ router.post('/user/create', validateCreateUser, async (req: Request, res: Respon
     }
 })
 
-
-router.post
 
 export const userRouter = router;
