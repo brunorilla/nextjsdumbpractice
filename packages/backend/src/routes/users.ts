@@ -29,7 +29,6 @@ router.post('/user/create', validateCreateUser, async (req: Request, res: Respon
     try {
         const {password, ...newUser} = req.body;
         const emailAlreadyExists: boolean = await emailExists(newUser.email)
-        logger.info(`Email already exists? ${emailAlreadyExists}`)
         if (emailAlreadyExists) {
             return res.status(400).json("{error: 'Email already in use'}")
         }

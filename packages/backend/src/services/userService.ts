@@ -13,14 +13,13 @@ async function createFirebaseUser(email: string, password: string) {
         return userRecord.uid;
     } catch (error: any) {
         logger.error(`Error creating new user: ${error}`);
-        return error.toString();
+        return 'Email already in use.';
     }
 }
 
 
 async function emailExists(email: string): Promise<boolean> {
     const querySnapshot = await firestore.collection(USER_COLLECTION).where('email', '==', email).get();
-    logger.info(`"querySnapshot:   ", ${querySnapshot}`)
     return !querySnapshot.empty;
 }
 
