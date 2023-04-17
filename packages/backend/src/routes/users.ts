@@ -6,6 +6,7 @@ import {validateCreateUser} from "../middleware/validators";
 import {createFirebaseUser} from "../services/userService";
 import {emailExists} from "../services/userService";
 import {createUser} from "../controllers/userController";
+import logger from "../config/logger";
 
 const router: Router = express.Router();
 
@@ -28,8 +29,9 @@ router.post('/user/create', validateCreateUser, async (req: Request, res: Respon
     try {
         const {password, ...newUser} = req.body;
         const emailAlreadyExists: boolean = await emailExists(newUser.email)
+        logger.info(`Email already exists? ${emailAlreadyExists}`)
         if (emailAlreadyExists) {
-            return res.status(400).json({error: 'Email already in use'})
+            return res.status(400).json("{error: 'Email already in use'}")
         }
         const firebaseUID = await createFirebaseUser(newUser.email, password)
         if (firebaseUID !== '') {

@@ -19,7 +19,7 @@
   "devDependencies": {
     "nodemon": "^2.0.22"
   },
-  "scripts
+  "scripts": {
     "start": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts"
   }
 }
