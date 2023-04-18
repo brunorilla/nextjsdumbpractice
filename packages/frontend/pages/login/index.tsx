@@ -14,11 +14,12 @@ const LoginPage: React.FC = () => {
         <>
             <div className={styles.main}>
                 <LogInWrapper/>
-                <div className={globalStyles.wrapper + " " + globalStyles.displayFlex + " " + globalStyles.marginTop10}><h4>¿No es usuario? </h4><Link className={globalStyles.registerLink} href={"/signup"}
-                                                    onClick={() => setAuthState(prev => ({
-                                                        ...prev,
-                                                        isRegistered: false
-                                                    }))}>Regístrese
+                <div className={globalStyles.wrapper + " " + globalStyles.displayFlex + " " + globalStyles.marginTop10}>
+                    <h4>¿No es usuario? </h4><Link className={globalStyles.registerLink} href={"/signup"}
+                                                   onClick={() => setAuthState(prev => ({
+                                                       ...prev,
+                                                       isRegistered: false
+                                                   }))}>Regístrese
                 </Link>
                 </div>
 

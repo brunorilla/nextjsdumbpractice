@@ -1,9 +1,10 @@
 import React, {useState} from "react";
 import * as Yup from 'yup';
-import {ErrorMessage, Field, Form, Formik} from "formik";
+import {ErrorMessage, Field, Form, Formik, FormikValues} from "formik";
 import formStyles from '@/pages/signup/signupstyles.module.css';
 import globalStyles from "@/styles/utils.module.css";
 import {Button} from "antd";
+import {useAuth} from "@/lib/auth";
 
 export const LogInWrapper: React.FC = ({todos, setTodos}) => {
     const LogInSchema = Yup.object().shape({
@@ -14,6 +15,11 @@ export const LogInWrapper: React.FC = ({todos, setTodos}) => {
             .min(8, 'Su contraseña no puede ser menor a 8 caracteres')
             .required('Olvido ingresar su contraseña')
     })
+    const {authState, login} = useAuth();
+
+    const handleLogin = (values: FormikValues) => {
+        login(values.email, values.password)
+    }
 
     return (
         <>
@@ -27,10 +33,10 @@ export const LogInWrapper: React.FC = ({todos, setTodos}) => {
                         password: '',
                     }}
                     validationSchema={LogInSchema}
-                    onSubmit={(values) => console.log(values)}
+                    onSubmit={handleLogin}
                 >
                     {
-                        ({errors, touched}) => (
+                        ({errors, touched, handleSubmit, isSubmitting}) => (
                             <div className={formStyles.formContainer}>
                                 <Form>
                                     <div className={formStyles.formGroup}>
@@ -43,7 +49,7 @@ export const LogInWrapper: React.FC = ({todos, setTodos}) => {
                                         <Field className={formStyles.formInput} name={"password"} type={"password"}></Field>
                                         <ErrorMessage className={formStyles.formError} name={"password"}></ErrorMessage>
                                     </div>
-                                    <Button className={formStyles.formButton} type="submit">Ingresar</Button>
+                                    <Button className={formStyles.formButton} type="submit" onClick={()=>handleSubmit()} loading={isSubmitting}>Ingresar</Button>
                                 </Form>
                             </div>
                         )

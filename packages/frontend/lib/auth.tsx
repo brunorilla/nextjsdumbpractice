@@ -1,4 +1,6 @@
-import {createContext, ReactNode, useContext, useState} from 'react';
+import {createContext, ReactNode, useContext, useEffect, useState} from 'react';
+import {auth} from './firebase';
+import {signInWithEmailAndPassword, signOut} from 'firebase/auth';
 
 type AuthState = {
     isAuthenticated: boolean;
@@ -7,7 +9,7 @@ type AuthState = {
 
 interface AuthContextProps {
     authState: AuthState;
-    login: () => void;
+    login: (email: string, password: string) => void;
     logout: () => void;
     setAuthState: (state: (prev: AuthState) => AuthState) => void;
 }
@@ -19,7 +21,8 @@ const AuthContext = createContext<AuthContextProps>({
     },
     logout: () => {
     },
-    setAuthState: ()=> {}
+    setAuthState: () => {
+    }
 });
 
 
@@ -30,12 +33,31 @@ export function useAuth() {
 export const AuthProvider: React.FC = ({children}) => {
     const [authState, setAuthState] = useState<AuthState>({isAuthenticated: false, isRegistered: true});
 
-    const login: () => void = () => {
-        setAuthState((prev) => ({...prev, isAuthenticated: true}));
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((authUser) => {
+            if (authUser) {
+                setAuthState((prev) => ({...prev, isAuthenticated: true}))
+            } else {
+                setAuthState((prev) => ({...prev, isAuthenticated: false}))
+            }
+        })
+        return () => unsubscribe();
+    }, [])
+
+    const login: (email: string, password: string) => void = async (email, password) => {
+        try {
+            await signInWithEmailAndPassword(auth, email, password)
+        } catch(error){
+            console.error("Login error: ", error)
+        }
     }
 
-    const logout: () => void = () => {
-        setAuthState(prev => ({...prev, isAuthenticated: false}));
+    const logout: () => void = async () => {
+        try {
+            await signOut(auth);
+        } catch(error){
+            console.error("Logout error: ", error);
+        }
     }
 
 
