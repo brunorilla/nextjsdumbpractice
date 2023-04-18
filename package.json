@@ -9,5 +9,8 @@
   "workspaces": [
     "packages/frontend",
     "packages/backend"
-  ]
+  ],
+  "devDependencies": {
+    "jest": "^29.5.0"
+  }
 }
