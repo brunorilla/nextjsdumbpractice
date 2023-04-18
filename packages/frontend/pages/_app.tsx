@@ -13,32 +13,23 @@ export default function App({Component, pageProps}: AppProps) {
 
     return (
         <AuthProvider>
-            <MainComponentWrapper Component={Component} pageProps={pageProps}></MainComponentWrapper>
+            <MainComponentWrapper Component={Component} pageProps={pageProps}/>
         </AuthProvider>
     )
 }
 
-
 function MainComponentWrapper({Component, pageProps}: AppProps) {
     const {authState} = useAuth();
-
     return (
         <>
+            <Nav/>
             {authState.isAuthenticated ? (
-                <>
-                    <Nav></Nav>
-                    <Component {...pageProps}/>
-                </>
-            ) : (!authState.isAuthenticated && authState.isRegistered ? (
-                    <>
-                        <LoginPage/>
-                    </>
-                ) : <SignUp/>
-            )
-            }
+                <Component {...pageProps} />
+            ) : authState.isRegistered ? (
+                <LoginPage/>
+            ) : (
+                <SignUp/>
+            )}
         </>
-    )
-
+    );
 }
-
-
