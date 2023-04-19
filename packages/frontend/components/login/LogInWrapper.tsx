@@ -56,15 +56,15 @@ export const LogInWrapper: React.FC = ({todos, setTodos}) => {
                                     <Form>
                                         <div className={formStyles.formGroup}>
                                             <label className={formStyles.formLabel} htmlFor="email">Email</label>
-                                            <Field className={formStyles.formInput} name={"email"}></Field>
+                                            <Field className={formStyles.formInput} name={"email"} id={"email"} aria-label={"Email"}></Field>
                                             <ErrorMessage className={formStyles.formError}
                                                           name={"email"}></ErrorMessage>
                                         </div>
                                         <div className={formStyles.formGroup}>
                                             <label className={formStyles.formLabel}
-                                                   htmlFor="password">Constraseña</label>
+                                                   htmlFor="password">Contraseña</label>
                                             <Field className={formStyles.formInput} name={"password"}
-                                                   type={"password"}></Field>
+                                                   type={"password"} id={"password"}></Field>
                                             <ErrorMessage className={formStyles.formError}
                                                           name={"password"}></ErrorMessage>
                                         </div>
