@@ -11,6 +11,5 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 
 export const CustomButton: React.FC<ButtonProps> = ({text, onClick, loading, styling}) => {
-    return <Button className={styling !== styles.deleteButton ? styles.formButton: styles.deleteButton} onClick={onClick} loading={loading}
-    >{text}</Button>
+    return <Button className={styling !== styles.deleteButton ? styles.formButton: styles.deleteButton} onClick={onClick} loading={loading}  >{text}</Button>
 }

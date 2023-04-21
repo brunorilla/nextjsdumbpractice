@@ -68,7 +68,7 @@ export const LogInWrapper: React.FC = ({todos, setTodos}) => {
                                             <ErrorMessage className={formStyles.formError}
                                                           name={"password"}></ErrorMessage>
                                         </div>
-                                        <Button className={formStyles.formButton} type="submit"
+                                        <Button  data-testId={"submitbtn"} className={formStyles.formButton} type="submit"
                                                 onClick={() => handleSubmit()} loading={isSubmitting}>Ingresar</Button>
                                     </Form>
                                 </div>
