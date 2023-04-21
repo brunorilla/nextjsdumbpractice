@@ -1,6 +1,8 @@
 import express, {Request, Response} from 'express';
 import {userRouter} from "./routes/users";
+
 import cors from 'cors';
+import {verifyToken} from "./middleware/authentication";
 
 const app: express.Express = express();
 
@@ -17,6 +19,10 @@ app.use(express.json());
 app.use(userRouter);
 
 
+app.get('/protected', verifyToken ,(req: Request, res: Response) => {
+    console.log(res)
+    res.send({message: 'success'})
+});
 
 
 
