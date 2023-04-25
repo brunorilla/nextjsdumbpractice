@@ -9,7 +9,7 @@ type AuthState = {
 
 interface AuthContextProps {
     authState: AuthState;
-    login: (email: string, password: string) => void;
+    login: (email: string, password: string) => void | string;
     logout: () => void;
     setAuthState: (state: (prev: AuthState) => AuthState) => void;
     token: string | null;
@@ -72,6 +72,7 @@ export const AuthProvider: React.FC = ({children}) => {
             setToken(idToken);
         } catch(error){
             console.error("Login error: ", error)
+            return error.message;
         }
     }
 

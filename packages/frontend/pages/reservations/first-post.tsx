@@ -24,3 +24,4 @@ const Post: React.FC<Post> = ({title}) => {
 
 
 export default Post;
+

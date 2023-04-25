@@ -1,5 +1,6 @@
 import styles from '../../styles/Home.module.css';
 import {CustomButton} from "@/components/Button/CustomButton";
+import {FormReservation} from "@/components/reservations/FormReservation";
 
 interface PostProps {
     children: React.ReactNode
@@ -24,6 +25,7 @@ const Posts: React.FC<PostProps> = ({children}) => {
         <div className={styles.main}>
             <h1>Reservar</h1>
             {children}
+            <FormReservation/>
             <CustomButton onClick={getProtected} loading={false} text={"Probar"}/>
         </div>
     </>);

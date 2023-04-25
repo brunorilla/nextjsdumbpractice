@@ -6,6 +6,9 @@ import globalStyles from "@/styles/utils.module.css";
 import {Button} from "antd";
 import {useAuth} from "@/lib/auth";
 import {useRouter} from 'next/router';
+import {ToastContainer, toast} from 'react-toastify';
+import { userNotFoundErrorMsgRegExp} from "@/globals";
+
 
 export const LogInWrapper: React.FC = ({todos, setTodos}) => {
     const LogInSchema = Yup.object().shape({
@@ -17,13 +20,22 @@ export const LogInWrapper: React.FC = ({todos, setTodos}) => {
             .required('Olvido ingresar su contraseña')
     })
 
+
     const router = useRouter();
 
     const {authState, login} = useAuth();
 
 
-    const handleLogin = (values: FormikValues) => {
-        login(values.email, values.password)
+    const handleLogin = async (values: FormikValues) => {
+        const errorMessage = await login(values.email, values.password)
+        if (errorMessage && userNotFoundErrorMsgRegExp.test(errorMessage)) {
+            toast.error("Credenciales inexistentes. Cree una cuenta");
+        } else if(errorMessage) {
+            toast.error(errorMessage)
+        } else {
+            toas.success("Bienvenido");
+        }
+
     }
 
     useEffect(() => {
@@ -76,6 +88,7 @@ export const LogInWrapper: React.FC = ({todos, setTodos}) => {
                         }
                     </Formik>
                 </div>)}
+            <ToastContainer/>
         </>
 
     )
