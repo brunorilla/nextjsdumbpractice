@@ -114,3 +114,7 @@ a {
     color-scheme: dark;
   }
 }
+
+.ant-picker-ok button {
+  background-color: #1677ff
+}

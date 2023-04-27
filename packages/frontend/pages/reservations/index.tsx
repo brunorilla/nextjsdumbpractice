@@ -1,6 +1,8 @@
 import styles from '../../styles/Home.module.css';
 import {CustomButton} from "@/components/Button/CustomButton";
 import {FormReservation} from "@/components/reservations/FormReservation";
+import globalStyles from "@/styles/utils.module.css";
+
 
 interface PostProps {
     children: React.ReactNode
@@ -23,7 +25,7 @@ const Posts: React.FC<PostProps> = ({children}) => {
 
     return (<>
         <div className={styles.main}>
-            <h1>Reservar</h1>
+            <h1 className={globalStyles.formTitles}>Reservar</h1>
             {children}
             <FormReservation/>
             <CustomButton onClick={getProtected} loading={false} text={"Probar"}/>
