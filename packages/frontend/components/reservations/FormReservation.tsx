@@ -7,6 +7,8 @@ import {ServiceEnum} from "@/types/ServiceEnum";
 import {ToastContainer, toast} from "react-toastify";
 import * as Yup from "yup";
 import DatePickerField from "@/components/reservations/DatePickerField";
+import {createNewReservation} from "@/lib/mutations";
+import {useAuth} from "@/lib/auth";
 
 
 const serviceLabels = {
@@ -17,9 +19,14 @@ const serviceLabels = {
 
 
 export const FormReservation: React.FC = () => {
-    const submit = (values: FormikValues)=> {
-        console.log(values);
-        toast.info(JSON.stringify(values));
+
+    const {token} = useAuth()
+
+    const submit = async (values: FormikValues)=> {
+        console.log("SUBMITTING")
+        const respTest = await createNewReservation(values, token)
+        console.log(respTest)
+        return;
     }
 
     const LogInSchema = Yup.object().shape({
@@ -38,7 +45,6 @@ export const FormReservation: React.FC = () => {
             {
                 service: "",
                 date: "",
-                time: "",
             }}
                 onSubmit={submit}
                 validationSchema={LogInSchema}

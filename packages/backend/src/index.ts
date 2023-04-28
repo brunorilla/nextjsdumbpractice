@@ -3,6 +3,7 @@ import {userRouter} from "./routes/users";
 
 import cors from 'cors';
 import {verifyToken} from "./middleware/authentication";
+import {reservationsRouter} from "./routes/reservations";
 
 const app: express.Express = express();
 
@@ -17,6 +18,7 @@ app.use(cors({
 app.use(express.json());
 
 app.use(userRouter);
+app.use(reservationsRouter);
 
 
 app.get('/protected', verifyToken ,(req: Request, res: Response) => {

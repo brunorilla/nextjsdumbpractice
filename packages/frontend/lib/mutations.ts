@@ -1,6 +1,7 @@
 import {NewUser} from "@/types/User"
 import axios from 'axios';
-import {API_ENDPOINT, USER_CREATE_ENDPOINT} from "@/globals";
+import {API_ENDPOINT, RESERVATION_CREATE_ENDPOINT, USER_CREATE_ENDPOINT} from "@/globals";
+import {useAuth} from "@/lib/auth";
 
 export const createTodo = async (title: string) => {
   /*
@@ -40,5 +41,19 @@ export async function createNewUser(newUser: NewUser) {
     } catch (error) {
         console.error("Error creating user: ", error);
         return error;
+    }
+}
+
+
+export async function createNewReservation( input: any, token: any) {
+    const config = {
+        headers: { Authorization: `Bearer ${token}` }
+    };
+
+    try {
+        return await axios.post(`${API_ENDPOINT}${RESERVATION_CREATE_ENDPOINT}`, input, config);
+    } catch(error){
+        console.error("Error creating reservation ", error);
+        return error
     }
 }
